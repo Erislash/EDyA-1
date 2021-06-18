@@ -3,32 +3,34 @@
 // Creative Commons BY-NC 4.0 (Attribution-NonCommercial 4.0 International)
 
 #include <stdio.h>
-#include "helpers.h"
+#include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 
-void Swap(int* n, int* m);
+char* GetNewLine(void);
 
 int main(void) {
-    int a = 1, b = 255;
-    assert(a == 1 && b == 255);
+    char* linea = GetNewLine();
 
-    PrintInts((int[]){a, b}, 2);
+    printf("Linea: %s\n", linea);
+    printf("Cantidad de caracteres: %d\n", (int)strlen(linea));
 
-    Swap(&a, &b);
-    assert(a == 255 && b == 1);
-
-    PrintInts((int[]){a, b}, 2);
-
+    free(linea);
     return 0;
 }
 
-void Swap(int* n, int* m) {
-    *n += *m;
-    *m = *n - *m;
+char* GetNewLine(void) {
+    char c;
+    char* output = malloc(sizeof(char));
+    *output = '\0';
 
-    /*
-    int tmp = *n;
-    *n = *m;
-    *m = tmp;
-    */
+    printf("Ingrese una linea de texto: ");
+    while((c = fgetc(stdin)) != EOF && c != '\n'){
+        void* tmp = realloc(output, strlen(output) + sizeof(char) + 1);
+        assert(tmp != NULL);
+        output = (char*)tmp;
+        output[strlen(output) + 1] = '\0';
+        output[strlen(output)] = c;
+    }
+    return output;
 }
