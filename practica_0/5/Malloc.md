@@ -1,3 +1,9 @@
+> By Erik Gimenez
+>
+>https://github.com/Erislash
+>
+>Creative Commons BY-NC 4.0 (Attribution-NonCommercial 4.0 International)
+
 # Malloc:
 La función "malloc" o "memory allocation" perteneciente a la biblioteca standar [stdlib.h](https://es.wikipedia.org/wiki/Stdlib.h) de C usada para asignar dinámicamente un único gran bloque de memoria de un tamaño específico.
 
