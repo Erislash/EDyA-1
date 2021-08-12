@@ -129,6 +129,7 @@ void arreglo_enteros_imprimir(ArregloEnteros* arreglo){
     for (int i = 0; i < arreglo->capacidad; i++){
         printf("Arreglo[%d] -> %d\n", i, arreglo->direccion[i]);
     }
+    
 }
 
 
@@ -200,44 +201,7 @@ void test_ajustar(void) {
 
 
 
-void arreglo_enteros_insertar(ArregloEnteros* arr, int pos, int dato) {
-    int* newArr = malloc(sizeof(int) * arr->capacidad + 1);
-    assert(newArr);
-    arr->capacidad = arr->capacidad + 1;
-    int arrIter = 0;
-    int newArrIter = 0;
-    for ( ; i < arr->capacidad + 1; ){
-        if (arrIter == pos) {
-            newArr[newArrIter] = dato;
-            newArrIter++;
-        }else{
-            newArrIter++;
-            arrIter++;
-        }
-    }
 
-    free(arr->direccion);
-    arr->direccion = newArr;
-}
-
-void test_insertar(void) {
-    ArregloEnteros* arr = arreglo_enteros_crear(5);
-
-    arr->direccion[0] = 1;
-    assert(arr->direccion[0] == 1);
-    arr->direccion[1] = 2;
-    assert(arr->direccion[1] == 2);
-    arr->direccion[2] = 3;
-    assert(arr->direccion[2] == 3);
-    arr->direccion[3] = 4;
-    assert(arr->direccion[3] == 4);
-    arr->direccion[4] = 5;
-    assert(arr->direccion[4] == 5);
-
-
-    arr = arreglo_enteros_destruir(arr);
-    printf("test_insertar passed!\n");
-}
 
 
 
@@ -246,7 +210,6 @@ void test(void){
     test_escribir();
     test_capacidad();
     test_ajustar();
-    test_insertar();
 
     printf("All tests were passed!!\n");
 }
