@@ -7,13 +7,22 @@
 #include <math.h>
 #include <string.h>
 #include <assert.h>
-#include "arregloEnteros.h"
-#include "tests.h"
+#include "helpers.h"
 
+enum _bool {
+   false,
+   true
+};
+typedef enum _bool Bool;
 
+typedef struct _uni_matrix{
+    int rows;
+    int columns;
+    float* dir;
+} UniMatrix;
 
-int main(){
-    correrTests();
+int main (void) {
+    
 
 
     return 0;
