@@ -1,6 +1,6 @@
-#include "matriz.h"
 #include <assert.h>
 #include <stdio.h>
+#include "matriz.h"
 
 
 
@@ -73,8 +73,44 @@ void imprimirMatriz(Matriz* matriz) {
     for (int i = 0; i < filas * columnas; ++i) {
         printf("%0.2lf ", matriz->elementos[i]);
         if ((i + 1) % columnas == 0){
-            // printf("\nColumnas: %d\nI: %d\nModulo: %d", columnas, i, i % columnas);
             printf("\n\n");
         }
     }
+}
+
+
+
+void intercambiarFilas(Matriz* matriz, int fila1, int fila2) {
+    assert(fila1 >= 0 && fila2 >= 0 && fila1 < matriz->filas && fila2 <= matriz->filas);
+    int columnas = matriz->columnas;
+    for (int i = 0; i < columnas; ++i) {
+        int temp = matriz->elementos[fila1 * columnas + i];
+        matriz->elementos[fila1 * columnas + i] = matriz->elementos[fila2 * columnas + i];
+        matriz->elementos[fila2 * columnas + i] = temp;
+    }
+}
+
+
+
+void insertarFila(Matriz* matriz, int posicion) {
+    assert(posicion >= 0 && posicion <= matriz->filas);
+    double* nuevaMatriz = malloc(sizeof(double) * matriz->columnas * (matriz->filas + 1));
+    int columnas = numeroColumnasMatriz(matriz);
+    int filas = numeroFilasMatriz(matriz) + 1;
+
+    int iteradorOriginal = 0;
+    int iteradorNueva = 0;
+
+    for ( ; iteradorNueva < columnas * filas; ++iteradorNueva) {
+        if (iteradorNueva >= posicion * columnas && iteradorNueva < (posicion + 1) * columnas) {
+            nuevaMatriz[iteradorNueva] = 0.0;
+        }else{
+            nuevaMatriz[iteradorNueva] = matriz->elementos[iteradorOriginal];
+            ++iteradorOriginal;
+        }
+    }
+
+    free(matriz->elementos);
+    matriz->filas += 1;
+    matriz->elementos = nuevaMatriz;
 }

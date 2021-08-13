@@ -34,10 +34,10 @@ Matriz* destruirMatriz(Matriz* matriz);
  * @param columna La columna donde se encuentra el dato a leer.
  * @returns El dato que se encuentra en la posición especificada.
 */
-
-
-
 double leerMatriz(Matriz* matriz, int fila, int columna);
+
+
+
 /**
  * Escribe la posición especificada de una matriz dada con un dato dado.
  * @param matriz La matriz en la que se va a escribir.
@@ -45,19 +45,34 @@ double leerMatriz(Matriz* matriz, int fila, int columna);
  * @param columna La columna donde se esribirá
  * @param dato El dato que se escribirá en la posición especificada.
 */
-
-
-
 void escribirMatriz(Matriz* matriz, int fila, int columna, double dato);
+
+
+
 /**
  * Imprime una matriz dada
  * @param matriz La matriz a imprimir.
 */
-
-
-
 void imprimirMatriz(Matriz* matriz);
 
+
+
+/**
+ * Intercambia dos filas de una matriz dada
+ * @param matriz La matriz cuyas filas se intercambiaran.
+ * @param fila1 La primera fila a intercambiar.
+ * @param fila2 La segunda fila a intercambiar.
+*/
+void intercambiarFilas(Matriz* matriz, int fila1, int fila2);
+
+
+
+/**
+ * Inserta una nueva fila en la matriz
+ * @param matriz La matriz cuyas filas se intercambiaran.
+ * @param posicion Donde se agregará la nueva fila.
+*/
+void insertarFila(Matriz* matriz, int posicion);
 
 
 #endif /* __MATRIZ_H__ */

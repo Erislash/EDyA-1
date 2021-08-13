@@ -1,6 +1,7 @@
 #include "matriz.h"
 #include <assert.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 
 
@@ -24,7 +25,7 @@ Matriz* crearMatriz(int filas, int columnas) {
     Matriz* matriz = malloc(sizeof(Matriz));
     assert(matriz != NULL);
 
-    matriz->elementos = malloc(sizeof(double) * filas);
+    matriz->elementos = malloc(sizeof(double*) * filas);
     assert(matriz->elementos != NULL);
 
     for (int i = 0; i < filas; i++) {
@@ -87,4 +88,56 @@ void imprimirMatriz(Matriz* matriz) {
         }
         printf("\n\n");
     }
+}
+
+
+
+void intercambiarFilas(Matriz* matriz, int fila1, int fila2) {
+    assert(fila1 >= 0 && fila2 >= 0 && fila1 < matriz->filas && fila2 <= matriz->filas);
+    int columnas = matriz->columnas;
+    for (int i = 0; i < columnas; ++i) {
+        int temp = leerMatriz(matriz, fila1, i);
+        escribirMatriz(matriz, fila1, i, leerMatriz(matriz, fila2, i));
+        escribirMatriz(matriz, fila2, i, temp);
+    }
+}
+
+
+
+void insertarFila(Matriz* matriz, int posicion) {
+    assert(posicion >= 0 && posicion <= matriz->filas);
+    int filas = (matriz->filas) + 1;
+    int columnas = matriz->columnas;
+    double** nuevaMatriz = malloc(sizeof(double*) * filas);
+    assert(nuevaMatriz != NULL);
+
+
+    for (int i = 0; i < filas; i++) {
+        nuevaMatriz[i] = malloc(sizeof(double) * columnas);
+        assert(nuevaMatriz[i] != NULL);
+    }
+    
+    int iteradorOriginal = 0;
+    int iteradorNuevo = 0;
+
+    for (; iteradorNuevo < filas; ++iteradorNuevo) {
+        for (int j = 0; j < columnas; ++j) {
+            if (iteradorNuevo == posicion) {
+                nuevaMatriz[iteradorNuevo][j] = 0.0;
+            }else {
+                nuevaMatriz[iteradorNuevo][j] = matriz->elementos[iteradorOriginal][j];
+            }
+        }
+        if (iteradorNuevo != posicion){
+            ++iteradorOriginal;
+        }
+    }
+
+    for (int i = 0; i < filas - 1; i++) {
+        free(matriz->elementos[i]);
+    }
+
+    free(matriz->elementos);
+    matriz->filas += 1;
+    matriz->elementos = nuevaMatriz;
 }
