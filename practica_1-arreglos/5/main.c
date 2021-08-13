@@ -7,22 +7,44 @@
 #include <math.h>
 #include <string.h>
 #include <assert.h>
-#include "helpers.h"
+#include "matriz.h"
 
-enum _bool {
-   false,
-   true
-};
-typedef enum _bool Bool;
+void testCrearMatriz(void) {
+    printf("Test: testCrearMatriz iniciado...\n");
+    Matriz* matriz = crearMatriz(4, 4);
+    // imprimirMatriz(matriz);
+    matriz = destruirMatriz(matriz);
+    printf("\n...Test: testCrearMatriz Finalizado\n");
+}
 
-typedef struct _uni_matrix{
-    int rows;
-    int columns;
-    float* dir;
-} UniMatrix;
+void testEscribirLeerMatriz(void) {
+    printf("Test: testEscribirLeerMatriz iniciado...\n");
+    Matriz* matriz = crearMatriz(4, 4);
+    imprimirMatriz(matriz);
+    escribirMatriz(matriz, 2, 3, 92);
+    escribirMatriz(matriz, 0, 0, 422);
+    escribirMatriz(matriz, 1, 3, 12.23);
+
+    assert(leerMatriz(matriz, 2, 3) == 92.00);
+    assert(leerMatriz(matriz, 0, 0) == 422.00);
+    assert(leerMatriz(matriz, 1, 3) == 12.23);
+    printf("\n\n==================================\n\n");
+    imprimirMatriz(matriz);
+
+    matriz = destruirMatriz(matriz);
+    printf("\n...Test: testEscribirLeerMatriz Finalizado\n");
+}
+
+void correrTests() {
+    printf("Iniciando tests...\n");
+    testCrearMatriz();
+    testEscribirLeerMatriz();
+    printf("...Todos los tests finalizados\n");
+
+}
 
 int main (void) {
-    
+    correrTests();
 
 
     return 0;

@@ -3,7 +3,7 @@ SOURCE	= helpers.c main.c
 HEADER	= helpers.h
 OUT	=
 CC	 = gcc
-# valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes ./a.out
+# valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes -s ./a.out
 FLAGS	 = -g -c -Wall -Wextra -Werror
 LFLAGS	 = 
 
